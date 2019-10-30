@@ -8,6 +8,6 @@ metadata:
 spec:
   releaseName: bluebell-aks
   chart:
-    git: git@github.com:evillgenius75/bluebell
+    git: git@github.com:evillgenius75/bluebell-deploy
     ref: master
     path: cluster/charts/bluebell
