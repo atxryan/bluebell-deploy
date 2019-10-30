@@ -1,8 +1,8 @@
 apiVersion: "aadpodidentity.k8s.io/v1"
 kind: AzureIdentity
 metadata:
- name: bluebell-aks-msi
+ name: bluebell-aks
 spec:
  type: 0
- ResourceID: /subscriptions/fc127bd9-b9bd-4a86-a502-6e1d554bed0a/resourcegroups/MC_bluebell-rg-aks_bluebell-aks_centralus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/bluebell-aks-msi
- ClientID: d08f75b4-9767-4ad9-9b54-e37574f44520
+ ResourceID: /subscriptions/fc127bd9-b9bd-4a86-a502-6e1d554bed0a/resourcegroups/MC_bluebell-rg-aks_bluebell-aks_centralus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/bluebell-aks
+ ClientID: c1026d5e-b8fa-4cc0-957c-dcfc887321b4

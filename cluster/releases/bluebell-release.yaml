@@ -1,0 +1,13 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: bluebell-aks
+  namespace: default
+  annotations:
+    fluxcd.io/ignore: "false"
+spec:
+  releaseName: bluebell-aks
+  chart:
+    git: git@github.com:evillgenius75/bluebell
+    ref: master
+    path: cluster/charts/bluebell
