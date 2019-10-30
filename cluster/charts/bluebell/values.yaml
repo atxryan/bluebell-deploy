@@ -47,7 +47,8 @@ ingress:
       proxy_hide_header l5d-server-id;
   hosts:
     - host: 52.230.216.170.nip.io
-      paths: /
+      paths:
+        /
 
   tls: []
   #  - secretName: chart-example-tls
