@@ -3,6 +3,8 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: smoker-deploy
+  annotations:
+    fluxcd.io/automated: 'true'
 spec:
   replicas: 1
   template:
@@ -13,7 +15,8 @@ spec:
       containers:
       - name: smoker
         image: bluebell.azurecr.io/helium-integration-test:latest
-        args: ["dotnet",  "integration-test.dll", "-h","http://52.230.216.170.nip.io/","-t", "1", "-s", "100"]
+        args: ["dotnet", "integration-test.dll", "-h", "http://52.230.216.170.nip.io/",
+          "-t", "1", "-s", "100"]
         ports:
         - containerPort: 4122
         resources:
