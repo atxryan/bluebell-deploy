@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: smoker-deploy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: smoker
+    spec:
+      containers:
+      - name: smoker
+        image: bluebell.azurecr.io/helium-integration-test:latest
+        args: ["-h","http://http://52.230.216.170.nip.io/", "-t","1","-s","100"]
+        ports:
+        - containerPort: 4122
+        resources:
+          limits:
+            cpu: 200m
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 200Mi
