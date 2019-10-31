@@ -53,10 +53,6 @@ spec:
             - name: http
               containerPort: 4120
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: http
           readinessProbe:
             httpGet:
               path: /healthz
