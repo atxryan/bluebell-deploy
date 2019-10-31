@@ -3,5 +3,5 @@ kind: AzureIdentityBinding
 metadata:
  name: azure-identity-binding
 spec:
- AzureIdentity: bluebell-aks
+ AzureIdentity: bluebell-msi-aks
  Selector: podid
