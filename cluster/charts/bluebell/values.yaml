@@ -77,5 +77,5 @@ hpa:
   enabled: true
   minReplicas: 1
   maxReplicas: 10
-  metricName: repsonse_per_second
+  metricName: response_per_second
   metricTargetValue: 4
