@@ -75,7 +75,7 @@ keyVaultName: bluebell-aks-kv
 
 hpa:
   enabled: true
-  minReplicas: "1"
-  maxReplicas: "10"
+  minReplicas: 1
+  maxReplicas: 10
   metricName: repsonse_per_second
-  metricTragetValue: "4"
+  metricTargetValue: 4
