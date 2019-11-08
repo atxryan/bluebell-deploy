@@ -11,3 +11,6 @@ spec:
     git: git@github.com:evillgenius75/bluebell-deploy
     ref: master
     path: cluster/charts/bluebell
+  values:
+    image:
+      tag: cj8
