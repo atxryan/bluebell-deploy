@@ -13,4 +13,4 @@ spec:
     path: cluster/charts/bluebell
   values:
     image:
-      tag: cj8
+      tag: cja
