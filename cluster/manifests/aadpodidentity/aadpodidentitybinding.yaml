@@ -1,7 +1,0 @@
-apiVersion: "aadpodidentity.k8s.io/v1"
-kind: AzureIdentityBinding
-metadata:
- name: azure-identity-binding
-spec:
- AzureIdentity: bluebell-msi-aks
- Selector: podid
