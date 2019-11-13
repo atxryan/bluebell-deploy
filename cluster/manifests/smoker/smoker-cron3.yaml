@@ -14,5 +14,5 @@ spec:
             - name: smoker3
               image: bluebell.azurecr.io/helium-integration-test
               imagePullPolicy: Always
-              command: ["dotnet", "integration-test.dll", "-h", "http://52.230.216.170.nip.io/","-t", "1", "-s", "100"]
+              command: ["dotnet", "integration-test.dll", "-h", "http://52.230.216.170.nip.io/","-t", "1", "-s", "100","-d","600"]
           restartPolicy: OnFailure
