@@ -228,7 +228,6 @@ In the root of the clones repository make the `aad-podid.sh` script executable
 ```shell
 sudo chmod +x aad-podid.sh
 
-./aad-podid.sh -a ${He_AKS_Name} -r ${He_App_RG} -m ${He_Name}-msi -k ${He_Name}
-
+./aad-podid.sh -a ${He_AKS_Name} -r ${He_App_RG} -m ${He_Name}-msi
 ```
 
