@@ -2,7 +2,8 @@
 
 ## Background
 
-Fill in here backgrounder on Helium. The who, what, why and how
+Project Helium is a reusable Advocated Pattern (AdPat) being built with the WMT ATX Cloud Factory team as part of their AdPat catalog.
+The focus was originally Azure App Services (Web Apps for Containers). The goal is to have a best practices implementation of a C# (TypeScript/Node & Java Springboot are under development) + CosmosDB + Key Vault + Azure Monitor application that project teams can use to build applications that support security HA, DR and Business Continuity.
 
 ### Azure Components in Use
 
