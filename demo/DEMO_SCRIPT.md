@@ -231,3 +231,10 @@ sudo chmod +x aad-podid.sh
 ./aad-podid.sh -a ${He_AKS_Name} -r ${He_App_RG} -m ${He_Name}-msi
 ```
 
+## Dashboard setup
+
+Open `AKS Dashboard.json` in an editor and update `{SUBSCRIPTION_GUID}` with your subscription, `{AKS_RESOURCE_GROUP}` with your AKS cluster resource group name, and `{COSMOS_RESOURCE_GROUP}` with your Cosmos resource group name.
+
+Navigate to ([Dashboard](https://portal.azure.com/#dashboard)) within your Azure portal. Click upload and select the `AKS Dashboard.json` file with your correct subscription GUID, resource group names, and app name.
+
+For more documentation on creating and sharing Dashboards, see ([here](https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-dashboards)).
