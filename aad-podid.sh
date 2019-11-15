@@ -5,7 +5,6 @@ do
  a) AKS_NAME=${OPTARG};;
  r) AKS_RG=${OPTARG};;
  m) MSI_NAME=${OPTARG};;
- k) KEY_VAULT_NAME=${OPTARG};;
  *) echo "Please refer to usage guide on GitHub" >&2
     exit 1 ;;
  esac
@@ -76,7 +75,7 @@ fi
 
 while ! az role assignment create --role Reader --assignee $MSI_PrincID --scope $AKS_NODE_RG_RESID
 do
-  echo "Waiting for AAD Propogation of Identity"
+  echo "Sleeping for 10 seconds waiting for AAD Propogation of Identity"
   sleep 10s
 done
 
@@ -113,18 +112,18 @@ if echo $AKS_SP_ObjID > /dev/null 2>&1 && echo $MSI_ResID > /dev/null 2>&1; then
     fi
 fi
 
-echo "assigning the Managed Identity access rights to the Azure Key Vault"
-if echo $KEY_VAULT_NAME > /dev/null 2>&1 && echo $MSI_PrincID > /dev/null 2>&1; then
-    if ! az keyvault set-policy -n $KEY_VAULT_NAME --object-id $MSI_PrincID --secret-permissions get list --key-permissions get list --certificate-permissions get list; then
-        echo "ERROR: failed to assign the Managed Identity access rights to the Azure Key Vault"
-        exit 1
-    fi
-fi
+# echo "assigning the Managed Identity access rights to the Azure Key Vault"
+# if echo $KEY_VAULT_NAME > /dev/null 2>&1 && echo $MSI_PrincID > /dev/null 2>&1; then
+#     if ! az keyvault set-policy -n $KEY_VAULT_NAME --object-id $MSI_PrincID --secret-permissions get list --key-permissions get list --certificate-permissions get list; then
+#         echo "ERROR: failed to assign the Managed Identity access rights to the Azure Key Vault"
+#         exit 1
+#     fi
+# fi
 
 
 
 echo "The aadpodidentity resource will be deployed to cluster $AKS_NAME. It will be saved to your current directory as aadpodidentity.yaml"
-cat << EOF > cluster/manifests/aadpodidentity/aadpodidentity.yaml
+cat << EOF > cluster/manifests/aadpodidentity/${MSI_NAME}aadpodidentity.yaml
 apiVersion: "aadpodidentity.k8s.io/v1"
 kind: AzureIdentity
 metadata:
@@ -137,7 +136,7 @@ EOF
 
 echo "deploying aadpodidentity resource into the default namespace"
 if kubectl get deploy mic > /dev/null 2>&1; then
-    if ! kubectl apply -f cluster/manifests/aadpodidentity/aadpodidentity.yaml; then
+    if ! kubectl apply -f cluster/manifests/aadpodidentity/${MSI_NAME}aadpodidentity.yaml; then
         echo "ERROR: failed to create kubernetes aadpodidenity resource"
         exit 1
     fi
@@ -148,19 +147,20 @@ cat << EOF > cluster/manifests/aadpodidentity/aadpodidentitybinding.yaml
 apiVersion: "aadpodidentity.k8s.io/v1"
 kind: AzureIdentityBinding
 metadata:
- name: azure-identity-binding
+ name: ${MIS_NAME}-binding
 spec:
- AzureIdentity: $MSI_NAME
- Selector: podid
+ AzureIdentity: ${MSI_NAME}
+ Selector: podid-${MSI_NAME}
 EOF
 
 echo "creating deploying aadpodidentitybinding resource into the default namespace"
 if kubectl get deploy mic > /dev/null 2>&1; then
-    if ! kubectl apply -f cluster/manifests/aadpodidentity/aadpodidentitybinding.yaml; then
+    if ! kubectl apply -f cluster/manifests/aadpodidentity/${MSI_NAME}aadpodidentitybinding.yaml; then
         echo "ERROR: failed to create kubernetes aadpodidenitybinding resource"
         exit 1
     fi
 fi
 
 echo "AAD Pod Identity has been deployed to you cluster $AKS_NAME and is using $MSI_NAME for its managed Identity"
-echo "Add the label aadpodidentity: podid to your deployment to assign an aad MSi to those pods"
+echo "Add the label aadpodidentity: podid=${MSI_NAME} to your deployment to assign an aad MSi to those pods"
+echo "Now you can configure ${MSI_NAME} to have access rihts to any azure resource based on Azure IAM roles"
