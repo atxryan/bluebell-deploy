@@ -13,7 +13,7 @@ spec:
         spec:
           containers:
             - name: smoker1
-              image: bluebell.azurecr.io/helium-integration-test
+              image: bluebell.azurecr.io/helium-aks-integration-test
               imagePullPolicy: Always
               command: ["dotnet", "integration-test.dll", "-h", "http://52.230.216.170.nip.io/","-t", "1", "-s", "100","-d","450"]
           restartPolicy: OnFailure
